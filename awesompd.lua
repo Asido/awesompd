@@ -1109,7 +1109,7 @@ function awesompd:try_get_local_cover()
       
       -- Get all images in the folder. Also escape occasional single
       -- quotes in folder name.
-      local request = format("ls '%s' | grep -P '\.jpg\|\.png\|\.gif|\.jpeg'",
+      local request = format("ls '%s' | grep -P '.jpg|.png|.gif|.jpeg'",
                              string.gsub(folder, "'", "'\\''"))
 
       local covers = self.pread(request, "*all")
@@ -1122,7 +1122,7 @@ function awesompd:try_get_local_cover()
             -- expressions suck:[
             local front_cover = 
                self.pread('echo "' .. covers .. 
-                          '" | grep -i "cover\|front\|folder\|albumart" | head -n 1', "*line")
+                          '" | grep -i "cover|front|folder|albumart" | head -n 1', "*line")
             if front_cover then
                result = folder .. front_cover
             end
